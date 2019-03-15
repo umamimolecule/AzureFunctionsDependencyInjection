@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp", "source\FunctionApp1\FunctionApp.csproj", "{89C69B0D-28EE-40F9-BC32-13E5D8CBAABF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp", "source\FunctionApp\FunctionApp.csproj", "{89C69B0D-28EE-40F9-BC32-13E5D8CBAABF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dependencies", "source\Dependencies\Dependencies.csproj", "{7458AAC5-EC50-4D2B-B2A8-606FAEF52FF8}"
 EndProject
