@@ -2,16 +2,20 @@
 This is a sample solution to show how to do dependency injection in Azure Functions.  The project is structured in a way to achieve isolation of dependencies from the Azure Function app.
 
 ## Techonology
-Visual Studio 2017
-.NET Standard 2.0
-Azure Functions SDK, version >= 1.0.26
-![NetCore.AutoRegisterDi](https://github.com/JonPSmith/NetCore.AutoRegisterDi)
+ - Visual Studio 2017
+ - .NET Standard 2.0
+ - Azure Functions SDK, version >= 1.0.26
+ - ![NetCore.AutoRegisterDi](https://github.com/JonPSmith/NetCore.AutoRegisterDi)
 
-## Overview
+## Motivation
 Now that Azure Functions SDK supports defining functions within a non-static class, we can inject dependencies into those class instances.
 
+This lets us more easily test our app by substitutin mocks or stubs for those dependencies that c external systems, such as databases, logging, HTTP calls, etc.
+
+Also this project shows how we can automatically register public types within our assemblies.
+
 ## Project Structure
- - Adapters: Contains a service implementation.  You would normally put your adapters here that connect to external systems, such as databases, logging, HTTP calls, etc.
+ - Adapters: Contains a service implementation.  You would normally put your adapters here that connect to external systems.
  - Common: Defines the service interfaces.  You would normall put your business logic here.
  - Dependencies: This is the middle layer between the Function app and the adapters.  Contains the service registration code.
  - FunctionApp: Our Azure Function application which contains a single function and some injected services.
