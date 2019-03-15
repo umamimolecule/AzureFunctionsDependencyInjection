@@ -3,8 +3,8 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: WebJobsStartup(typeof(FunctionApp1.Startup))]
-namespace FunctionApp1
+[assembly: WebJobsStartup(typeof(FunctionApp.Startup))]
+namespace FunctionApp
 {
     internal class Startup : IWebJobsStartup
     {

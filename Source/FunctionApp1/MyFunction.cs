@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 using Common;
 using Microsoft.Extensions.Logging;
 
-namespace FunctionApp1
+namespace FunctionApp
 {
-    public class Function1
+    public class MyFunction
     {
         // The service that is injected
         private readonly IMyService myService;
 
-        public Function1(IMyService myService)
+        public MyFunction(IMyService myService)
         {
             this.myService = myService;
         }
 
-        [FunctionName("Function1")]
+        [FunctionName("MyFunction")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, ILogger logger)
         {
             logger.LogInformation("C# HTTP trigger function processed a request.");
