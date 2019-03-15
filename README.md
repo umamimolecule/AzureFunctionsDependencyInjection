@@ -1,5 +1,5 @@
 # AzureFunctionsDependencyInjection
-This is a sample solution to show how to do dependency injection in Azure Functions.  The project is structured in a way to achieve isolation of dependencies from the Azure Function app.
+This is a sample solution to show how you can do dependency injection in Azure Functions.  The project is structured in a way to achieve isolation of dependencies from the Azure Function app.
 
 ## Techonology
  - Visual Studio 2017
