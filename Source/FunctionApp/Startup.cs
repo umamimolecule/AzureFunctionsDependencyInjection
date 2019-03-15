@@ -1,7 +1,6 @@
 ﻿using Dependencies;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 [assembly: WebJobsStartup(typeof(FunctionApp.Startup))]
 namespace FunctionApp
@@ -10,16 +9,8 @@ namespace FunctionApp
     {
         public void Configure(IWebJobsBuilder builder)
         {
-            AdapterModule module = new AdapterModule();
-            module.Configure(builder);
-        }
-
-        private void ConfigureServices(IServiceCollection services)
-        {
-            // TODO: Register services here if required
-            //services.AddTransient<ITransientGreeter, Greeter>();
-            //services.AddScoped<IScopedGreeter, Greeter>();
-            //services.AddSingleton<ISingletonGreeter, Greeter>();
+            builder.AddModule(new AdapterModule())
+                   .AddModule(new DomainModule());
         }
     }
 }

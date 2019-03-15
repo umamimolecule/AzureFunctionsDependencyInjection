@@ -1,12 +1,11 @@
-﻿using System;
-using Adapters;
-using Common;
+﻿using Adapters;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.DependencyInjection;
+using NetCore.AutoRegisterDi;
 
 namespace Dependencies
 {
-    public class AdapterModule
+    public class AdapterModule : IModule
     {
         public void Configure(IWebJobsBuilder builder)
         {
@@ -15,15 +14,16 @@ namespace Dependencies
 
         private void ConfigureServices(IServiceCollection services)
         {
-            // TODO: Register types here!
+            // Service can be registered manually, for example:
             // services.AddTransient<ITransientGreeter, Greeter>();
             // services.AddScoped<IScopedGreeter, Greeter>();
             // services.AddSingleton<ISingletonGreeter, Greeter>();
 
             // A new instance will be created each time the dependency is required
-            // (eg if injected into Azure funcitons class via constructor, then a
+            // (eg if injected into an Azure function via a constructor, then a
             // new instance will be created each time the Azure function is called)
-            services.AddTransient<IMyService, MyService>();
+            services.RegisterAssemblyPublicNonGenericClasses(typeof(MyService).Assembly)
+                .AsPublicImplementedInterfaces(ServiceLifetime.Transient);
         }
     }
 }

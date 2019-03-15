@@ -13,12 +13,19 @@ namespace FunctionApp
 {
     public class MyFunction
     {
-        // The service that is injected
+        // The services that are injected via constructor
         private readonly IMyService myService;
+        private readonly IAnotherService anotherService;
+        private readonly INestedService nestedService;
 
-        public MyFunction(IMyService myService)
+        public MyFunction(
+            IMyService myService,
+            IAnotherService anotherService,
+            INestedService nestedService)
         {
             this.myService = myService;
+            this.anotherService = anotherService;
+            this.nestedService = nestedService;
         }
 
         [FunctionName("MyFunction")]
@@ -31,7 +38,10 @@ namespace FunctionApp
             string requestBody = new StreamReader(req.Body).ReadToEnd();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
+
+            this.anotherService.DoStuff(name);
             await this.myService.DoStuffAsync(name);
+            await this.nestedService.ChildService.DoStuffAsync($"{name} (Nested)");
 
             return name != null
                 ? (ActionResult)new OkObjectResult($"Hello, {name}")
