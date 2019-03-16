@@ -1,4 +1,4 @@
-# AzureFunctionsDependencyInjection
+# Dependency Injection for Azure Functions
 This is a sample solution to show how you can do dependency injection in Azure Functions.  The project is structured in a way to achieve isolation of dependencies from the Azure Function app.
 
 ## Techonology
@@ -10,7 +10,7 @@ This is a sample solution to show how you can do dependency injection in Azure F
 ## Motivation
 Now that Azure Functions SDK supports defining functions within a non-static class, we can inject dependencies into those class instances.
 
-This lets us more easily test our app by substitutin mocks or stubs for those dependencies that c external systems, such as databases, logging, HTTP calls, etc.
+This lets us more easily test our app by using mocks or stubs for those dependencies that access external systems, such as databases, logging, HTTP calls, etc.
 
 Also this project shows how we can automatically register public types within our assemblies.
 
@@ -44,9 +44,9 @@ namespace FunctionApp
 }
 ```
 
-Where `AdapterModule` registers the dependencies within the `Adapters` assembly, and `DomainModule` registers the ones in the `Common` assembly.
+Here, `IWebJobsBuilder.AddModule` is an extension method I've defined which accepts an `IModule` instance to register dependencies.  `AdapterModule` registers the dependencies within the `Adapters` assembly, and `DomainModule` registers the ones in the `Common` assembly.
 
-The actual registration of the services is done in ech module using the NetCore.AutoRegisterDi extension methods:
+The actual registration of the services is done in ech module using the `NetCore.AutoRegisterDi` extension method RegisterAssemblyPublicNonGenericClasses:
 ```
 using Adapters;
 using Microsoft.Azure.WebJobs;
